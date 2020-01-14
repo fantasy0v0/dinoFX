@@ -1,0 +1,46 @@
+plugins {
+  id 'java'
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.0.8'
+  id 'org.beryx.jlink' version '2.12.0'
+}
+
+repositories {
+  mavenLocal()
+  maven {
+    url 'https://mirrors.huaweicloud.com/repository/maven/'
+  }
+}
+
+javafx {
+  version = "12"
+  modules = [ 'javafx.graphics' ]
+}
+
+jlink {
+  launcher {
+    name = 'dino'
+  }
+}
+
+dependencies {
+  // Use JUnit Jupiter API for testing.
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
+
+  // Use JUnit Jupiter Engine for testing.
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.1'
+}
+
+application {
+  // Define the main class for the application.
+  mainClassName = 'fantasy0v0.dinoFx.App'
+}
+
+test {
+  // Use junit platform for unit tests
+  useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+  options.encoding = "UTF-8"
+}
