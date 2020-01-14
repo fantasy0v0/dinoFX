@@ -13,7 +13,7 @@ repositories {
 }
 
 javafx {
-  version = "12"
+  version = "13"
   modules = [ 'javafx.graphics' ]
 }
 

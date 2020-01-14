@@ -3,9 +3,14 @@
  */
 package fantasy0v0.dinoFx;
 
+import java.io.IOException;
+import java.io.InputStream;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -15,11 +20,25 @@ public class App extends Application {
   }
 
   @Override
-  public void start(Stage primaryStage) {
+  public void start(Stage primaryStage) throws IOException {
     Pane root = new Pane();
     Canvas canvas = new Canvas();
     canvas.heightProperty().bind(root.heightProperty());
     canvas.widthProperty().bind(root.widthProperty());
+
+    Module module = this.getClass().getModule();
+    InputStream resource = module.getResourceAsStream("offline-resources-2x.png");
+    Image offlineResources2X = new Image(resource);
+    GraphicsContext context2D = canvas.getGraphicsContext2D();
+
+    new AnimationTimer() {
+      @Override
+      public void handle(long now) {
+        context2D.drawImage(offlineResources2X, 0, 0, canvas.getWidth(), canvas.getHeight());
+      }
+    }.start();
+
+    root.getChildren().add(canvas);
     Scene scene = new Scene(root, 600, 150);
     primaryStage.setScene(scene);
     primaryStage.show();
