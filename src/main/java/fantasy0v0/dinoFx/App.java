@@ -31,10 +31,21 @@ public class App extends Application {
     Image offlineResources2X = new Image(resource);
     GraphicsContext context2D = canvas.getGraphicsContext2D();
 
+    long FPS_60 = 1_000_000_000L / 60;
+
+    long FPS_30 = 1_000_000_000L / 30;
+
     new AnimationTimer() {
+
+      private long lastTimerCall = 0;
+
       @Override
       public void handle(long now) {
-        context2D.drawImage(offlineResources2X, 0, 0, canvas.getWidth(), canvas.getHeight());
+        if (now >= lastTimerCall) {
+          context2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+          context2D.drawImage(offlineResources2X, 0, 0, canvas.getWidth(), canvas.getHeight());
+          lastTimerCall = now + (FPS_60 - (now - lastTimerCall));
+        }
       }
     }.start();
 
