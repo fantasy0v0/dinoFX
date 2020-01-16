@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class App extends Application {
+
   public static void main(String[] args) {
     launch(args);
   }
@@ -27,8 +28,10 @@ public class App extends Application {
     canvas.widthProperty().bind(root.widthProperty());
 
     Module module = this.getClass().getModule();
-    InputStream resource = module.getResourceAsStream("offline-resources-2x.png");
-    Image offlineResources2X = new Image(resource);
+    InputStream offlineResources1XResource = module.getResourceAsStream("offline-resources-1x.png");
+    InputStream offlineResources2XResource = module.getResourceAsStream("offline-resources-2x.png");
+    Image offlineResources1X = new Image(offlineResources1XResource);
+    Image offlineResources2X = new Image(offlineResources2XResource);
     GraphicsContext context2D = canvas.getGraphicsContext2D();
 
     long FPS_60 = 1_000_000_000L / 60;
@@ -43,7 +46,7 @@ public class App extends Application {
       public void handle(long now) {
         if (now >= lastTimerCall) {
           context2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-          context2D.drawImage(offlineResources2X, 0, 0, canvas.getWidth(), canvas.getHeight());
+          context2D.drawImage(offlineResources1X, 40, 4, 44, 45, 0, 0, 44, 45);
           lastTimerCall = now + (FPS_60 - (now - lastTimerCall));
         }
       }
@@ -52,6 +55,7 @@ public class App extends Application {
     root.getChildren().add(canvas);
     Scene scene = new Scene(root, 600, 150);
     primaryStage.setScene(scene);
+    primaryStage.setResizable(false);
     primaryStage.show();
   }
 }

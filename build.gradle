@@ -14,7 +14,7 @@ repositories {
 
 javafx {
   version = "13"
-  modules = [ 'javafx.graphics' ]
+  modules = [ 'javafx.graphics', 'javafx.media' ]
 }
 
 jlink {
