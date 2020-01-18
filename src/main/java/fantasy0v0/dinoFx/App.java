@@ -25,6 +25,7 @@ public class App extends Application {
     Pane root = new Pane();
     Canvas canvas = new Canvas();
     canvas.heightProperty().bind(root.heightProperty());
+    canvas.setHeight(600);
     canvas.widthProperty().bind(root.widthProperty());
 
     Module module = this.getClass().getModule();
