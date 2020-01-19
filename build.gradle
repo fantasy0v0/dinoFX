@@ -36,6 +36,10 @@ application {
   mainClassName = 'fantasy0v0.dinoFx.App'
 }
 
+run {
+  args = []
+}
+
 test {
   // Use junit platform for unit tests
   useJUnitPlatform()

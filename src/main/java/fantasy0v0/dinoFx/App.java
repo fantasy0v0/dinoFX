@@ -3,8 +3,6 @@
  */
 package fantasy0v0.dinoFx;
 
-import java.io.IOException;
-import java.io.InputStream;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -13,6 +11,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class App extends Application {
 
@@ -25,7 +26,6 @@ public class App extends Application {
     Pane root = new Pane();
     Canvas canvas = new Canvas();
     canvas.heightProperty().bind(root.heightProperty());
-    canvas.setHeight(600);
     canvas.widthProperty().bind(root.widthProperty());
 
     Module module = this.getClass().getModule();
