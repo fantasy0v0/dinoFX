@@ -48,7 +48,8 @@ public class App extends Application {
         if (now >= lastTimerCall) {
           context2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
           context2D.drawImage(offlineResources1X, 40, 4, 44, 45, 0, 0, 44, 45);
-          lastTimerCall = now + (FPS_60 - (now - lastTimerCall));
+          long waitTime = FPS_60 - (now - lastTimerCall);
+          lastTimerCall = now + (waitTime > 0 ? waitTime : 0);
         }
       }
     }.start();
