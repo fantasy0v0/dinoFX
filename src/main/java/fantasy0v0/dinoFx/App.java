@@ -3,12 +3,15 @@
  */
 package fantasy0v0.dinoFx;
 
+import fantasy0v0.dinoFx.sounds.SoundDefinition;
+import fantasy0v0.dinoFx.utils.Time;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -35,28 +38,36 @@ public class App extends Application {
     Image offlineResources2X = new Image(offlineResources2XResource);
     GraphicsContext context2D = canvas.getGraphicsContext2D();
 
-    long FPS_60 = 1_000_000_000L / 60;
-
-    long FPS_30 = 1_000_000_000L / 30;
-
     new AnimationTimer() {
 
-      private long lastTimerCall = 0;
+      double x = 0;
+
+      long lastTimeCall = 0;
 
       @Override
       public void handle(long now) {
-        if (now >= lastTimerCall) {
-          context2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-          context2D.drawImage(offlineResources1X, 40, 4, 44, 45, 0, 0, 44, 45);
-          long waitTime = FPS_60 - (now - lastTimerCall);
-          lastTimerCall = now + (waitTime > 0 ? waitTime : 0);
+        Time.update(now);
+        context2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+        x += Time.deltaTime * 1f / Time.second * 120;
+        context2D.drawImage(offlineResources1X, 40, 4, 44, 45, x, 0, 44, 45);
+        if (x >= canvas.getWidth()) {
+          x = 0;
         }
+
+        context2D.fillText(Double.toString(Time.fps), 80, 25);
       }
     }.start();
 
     root.getChildren().add(canvas);
     Scene scene = new Scene(root, 600, 150);
+    scene.setOnKeyPressed(event -> {
+      if (event.getCode().equals(KeyCode.SPACE)) {
+        SoundDefinition.BUTTON_PRESS.play();
+      }
+    });
     primaryStage.setScene(scene);
+    primaryStage.setTitle("chrome://dino");
     primaryStage.setResizable(false);
     primaryStage.show();
   }
