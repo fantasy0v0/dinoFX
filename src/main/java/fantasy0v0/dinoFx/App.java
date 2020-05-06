@@ -3,59 +3,44 @@
  */
 package fantasy0v0.dinoFx;
 
-import fantasy0v0.dinoFx.sounds.SoundDefinition;
+import fantasy0v0.dinoFx.resources.Resources;
 import fantasy0v0.dinoFx.utils.Time;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 public class App extends Application {
+
+  private double x = 0;
 
   public static void main(String[] args) {
     launch(args);
   }
 
   @Override
-  public void start(Stage primaryStage) throws IOException {
+  public void start(Stage primaryStage) {
     Pane root = new Pane();
     Canvas canvas = new Canvas();
     canvas.heightProperty().bind(root.heightProperty());
     canvas.widthProperty().bind(root.widthProperty());
 
-    Module module = this.getClass().getModule();
-    InputStream offlineResources1XResource = module.getResourceAsStream("offline-resources-1x.png");
-    InputStream offlineResources2XResource = module.getResourceAsStream("offline-resources-2x.png");
-    Image offlineResources1X = new Image(offlineResources1XResource);
-    Image offlineResources2X = new Image(offlineResources2XResource);
+    Resources.load();
     GraphicsContext context2D = canvas.getGraphicsContext2D();
+    Game game = new Game(context2D);
 
     new AnimationTimer() {
-
-      double x = 0;
-
-      long lastTimeCall = 0;
-
       @Override
       public void handle(long now) {
         Time.update(now);
         context2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
+        context2D.drawImage(Resources.offlineResources1X, 40, 4, 44, 45, x, 0, 44, 45);
+        game.update();
         x += Time.deltaTime * 1f / Time.second * 120;
-        context2D.drawImage(offlineResources1X, 40, 4, 44, 45, x, 0, 44, 45);
-        if (x >= canvas.getWidth()) {
-          x = 0;
-        }
-
-        context2D.fillText(Double.toString(Time.fps), 80, 25);
       }
     }.start();
 
@@ -63,7 +48,7 @@ public class App extends Application {
     Scene scene = new Scene(root, 600, 150);
     scene.setOnKeyPressed(event -> {
       if (event.getCode().equals(KeyCode.SPACE)) {
-        SoundDefinition.BUTTON_PRESS.play();
+        Resources.Sounds.BUTTON_PRESS.play();
       }
     });
     primaryStage.setScene(scene);

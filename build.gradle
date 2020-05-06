@@ -12,8 +12,12 @@ repositories {
   }
 }
 
+java {
+  sourceCompatibility = JavaVersion.VERSION_13
+}
+
 javafx {
-  version = "13"
+  version = "14"
   modules = [ 'javafx.graphics', 'javafx.media', 'javafx.controls' ]
 }
 
@@ -33,7 +37,7 @@ dependencies {
 
 application {
   // Define the main class for the application.
-  mainClassName = 'fantasy0v0.dinoFx.App'
+  mainClassName = 'dinoFx/fantasy0v0.dinoFx.App'
 }
 
 run {

@@ -14,7 +14,9 @@ public class Time {
   private static long lastTime = 0;
 
   public static void update(long now) {
-    deltaTime = now - lastTime;
+    if (0 != lastTime) {
+      deltaTime = now - lastTime;
+    }
     lastTime = now;
     fps = second * 1f / (deltaTime > 0 ? deltaTime : second);
   }
