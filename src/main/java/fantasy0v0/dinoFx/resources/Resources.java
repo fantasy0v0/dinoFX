@@ -26,7 +26,7 @@ public final class Resources {
   }
 
   public static void load() {
-
+    Sounds.load();
   }
 
   public static final class Sounds {

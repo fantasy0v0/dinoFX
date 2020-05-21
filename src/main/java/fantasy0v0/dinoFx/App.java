@@ -3,6 +3,7 @@
  */
 package fantasy0v0.dinoFx;
 
+import fantasy0v0.dinoFx.obj.Game;
 import fantasy0v0.dinoFx.resources.Resources;
 import fantasy0v0.dinoFx.utils.Time;
 import javafx.animation.AnimationTimer;
@@ -40,7 +41,7 @@ public class App extends Application {
         context2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         context2D.drawImage(Resources.offlineResources1X, 40, 4, 44, 45, x, 0, 44, 45);
         game.update();
-        x += Time.deltaTime * 1f / Time.second * 120;
+        x += Time.deltaTime * 120;
       }
     }.start();
 
@@ -49,6 +50,9 @@ public class App extends Application {
     scene.setOnKeyPressed(event -> {
       if (event.getCode().equals(KeyCode.SPACE)) {
         Resources.Sounds.BUTTON_PRESS.play();
+      }
+      if (event.getCode().equals(KeyCode.P)) {
+        game.pause();
       }
     });
     primaryStage.setScene(scene);

@@ -9,15 +9,18 @@ public class Time {
 
   public static double fps = 0;
 
-  public static long deltaTime = 0;
+  /**
+   * 每帧耗时, 单位:秒
+   */
+  public static double deltaTime = 0;
 
   private static long lastTime = 0;
 
   public static void update(long now) {
     if (0 != lastTime) {
-      deltaTime = now - lastTime;
+      deltaTime = (now - lastTime) / (double) second;
     }
     lastTime = now;
-    fps = second * 1f / (deltaTime > 0 ? deltaTime : second);
+    fps = deltaTime > 0 ? 1 / deltaTime : second;
   }
 }

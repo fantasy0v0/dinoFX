@@ -1,4 +1,4 @@
-package fantasy0v0.dinoFx;
+package fantasy0v0.dinoFx.obj;
 
 import fantasy0v0.dinoFx.resources.Resources;
 import fantasy0v0.dinoFx.sprite.SpriteDefinition;
@@ -21,7 +21,7 @@ public class Ground {
 
   public void update() {
     if (!isPause) {
-      float distance = Time.deltaTime * 1f / Time.second * 120;
+      double distance = Time.deltaTime * 120;
       x -= distance;
       sx -= distance;
       if (x <= -600) {
