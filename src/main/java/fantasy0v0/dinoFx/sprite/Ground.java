@@ -1,7 +1,6 @@
-package fantasy0v0.dinoFx.obj;
+package fantasy0v0.dinoFx.sprite;
 
 import fantasy0v0.dinoFx.resources.Resources;
-import fantasy0v0.dinoFx.sprite.SpriteDefinition;
 import fantasy0v0.dinoFx.utils.Time;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -43,6 +42,10 @@ public class Ground {
 
   public void pause() {
     isPause = true;
+  }
+
+  public void resume() {
+    isPause = false;
   }
 
   public void reset() {

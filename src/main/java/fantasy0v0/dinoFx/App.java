@@ -3,8 +3,8 @@
  */
 package fantasy0v0.dinoFx;
 
-import fantasy0v0.dinoFx.obj.Game;
 import fantasy0v0.dinoFx.resources.Resources;
+import fantasy0v0.dinoFx.sprite.Game;
 import fantasy0v0.dinoFx.utils.Time;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -16,8 +16,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class App extends Application {
-
-  private double x = 0;
 
   public static void main(String[] args) {
     launch(args);
@@ -39,9 +37,7 @@ public class App extends Application {
       public void handle(long now) {
         Time.update(now);
         context2D.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        context2D.drawImage(Resources.offlineResources1X, 40, 4, 44, 45, x, 0, 44, 45);
         game.update();
-        x += Time.deltaTime * 120;
       }
     }.start();
 
@@ -52,7 +48,11 @@ public class App extends Application {
         Resources.Sounds.BUTTON_PRESS.play();
       }
       if (event.getCode().equals(KeyCode.P)) {
-        game.pause();
+        if (game.isPaused()) {
+          game.resume();
+        } else {
+          game.pause();
+        }
       }
     });
     primaryStage.setScene(scene);
