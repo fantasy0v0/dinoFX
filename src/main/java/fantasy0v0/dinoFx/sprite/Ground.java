@@ -8,14 +8,17 @@ public class Ground {
 
   private final GraphicsContext graphicsContext;
 
+  private final Game game;
+
   private double x = 0;
 
   private double sx = 600;
 
   private boolean isPause = false;
 
-  public Ground(GraphicsContext graphicsContext) {
+  public Ground(GraphicsContext graphicsContext, Game game) {
     this.graphicsContext = graphicsContext;
+    this.game = game;
   }
 
   public void update() {
@@ -23,21 +26,27 @@ public class Ground {
       double distance = Time.deltaTime * 120;
       x -= distance;
       sx -= distance;
-      if (x <= -600) {
-        x = 600;
+      if (x <= -game.getWidth()) {
+        x = game.getWidth();
       }
-      if (sx <= -600) {
-        sx = 600;
+      if (sx <= -game.getWidth()) {
+        sx = game.getWidth();
       }
     }
     graphicsContext.drawImage(
-      Resources.offlineResources1X, SpriteDefinition.LDPI.HORIZON.getX(), SpriteDefinition.LDPI.HORIZON.getY(),
-      600, 13,
-      x, 100, 600, 13);
+      Resources.offlineResources1X,
+      SpriteDefinition.LDPI.HORIZON.getX(), SpriteDefinition.LDPI.HORIZON.getY(),
+      SpriteDefinition.LDPI.HORIZON.getWidth(), SpriteDefinition.LDPI.HORIZON.getHeight(),
+      x, 100,
+      SpriteDefinition.LDPI.HORIZON.getWidth(), SpriteDefinition.LDPI.HORIZON.getHeight()
+    );
     graphicsContext.drawImage(
-      Resources.offlineResources1X, SpriteDefinition.LDPI.HORIZON.getX() + 600, SpriteDefinition.LDPI.HORIZON.getY(),
-      600, 13,
-      sx, 100, 600, 13);
+      Resources.offlineResources1X,
+      SpriteDefinition.LDPI.HORIZON.getX() + game.getWidth(), SpriteDefinition.LDPI.HORIZON.getY(),
+      SpriteDefinition.LDPI.HORIZON.getWidth(), SpriteDefinition.LDPI.HORIZON.getHeight(),
+      sx, 100,
+      SpriteDefinition.LDPI.HORIZON.getWidth(), SpriteDefinition.LDPI.HORIZON.getHeight()
+    );
   }
 
   public void pause() {

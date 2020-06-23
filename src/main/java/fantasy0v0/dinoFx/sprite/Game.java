@@ -6,20 +6,26 @@ public class Game {
 
   private final GraphicsContext graphicsContext;
 
+  private double width;
+
+  private double height;
+
   private Ground ground;
 
   private Dino dino;
 
   private boolean paused;
 
-  public Game(GraphicsContext graphicsContext) {
+  public Game(GraphicsContext graphicsContext, double width, double height) {
+    this.width = width;
+    this.height = height;
     this.graphicsContext = graphicsContext;
     init();
   }
 
   private void init() {
-    ground = new Ground(graphicsContext);
-    dino = new Dino(graphicsContext);
+    ground = new Ground(graphicsContext, this);
+    dino = new Dino(graphicsContext, this);
   }
 
   public void update() {
@@ -43,5 +49,11 @@ public class Game {
     paused = false;
   }
 
+  public double getWidth() {
+    return width;
+  }
 
+  public double getHeight() {
+    return height;
+  }
 }

@@ -30,8 +30,15 @@ public class App extends Application {
 
     Resources.load();
     GraphicsContext context2D = canvas.getGraphicsContext2D();
-    Game game = new Game(context2D);
 
+    root.getChildren().add(canvas);
+    Scene scene = new Scene(root, 600, 150);
+    primaryStage.setScene(scene);
+    primaryStage.setTitle("chrome://dino");
+    primaryStage.setResizable(false);
+    primaryStage.show();
+
+    Game game = new Game(context2D, scene.getWidth(), scene.getHeight());
     new AnimationTimer() {
       @Override
       public void handle(long now) {
@@ -40,9 +47,6 @@ public class App extends Application {
         game.update();
       }
     }.start();
-
-    root.getChildren().add(canvas);
-    Scene scene = new Scene(root, 600, 150);
     scene.setOnKeyPressed(event -> {
       if (event.getCode().equals(KeyCode.SPACE)) {
         Resources.Sounds.BUTTON_PRESS.play();
@@ -55,9 +59,5 @@ public class App extends Application {
         }
       }
     });
-    primaryStage.setScene(scene);
-    primaryStage.setTitle("chrome://dino");
-    primaryStage.setResizable(false);
-    primaryStage.show();
   }
 }

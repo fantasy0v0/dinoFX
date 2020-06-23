@@ -1,6 +1,7 @@
 package fantasy0v0.dinoFx.sprite;
 
 import javafx.geometry.Point2D;
+import javafx.scene.shape.Rectangle;
 
 /**
  * 精灵定义类
@@ -29,7 +30,7 @@ public interface SpriteDefinition {
     /**
      * 地平线
      */
-    Point2D HORIZON = new Point2D(2, 54);
+    Rectangle HORIZON = new Rectangle(2, 54, 600, 13);
 
     /**
      * 月亮

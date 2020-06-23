@@ -8,12 +8,15 @@ public class Dino {
 
   private final GraphicsContext graphicsContext;
 
+  private final Game game;
+
   private double x = 0;
 
   private boolean isPause = false;
 
-  public Dino(GraphicsContext graphicsContext) {
+  public Dino(GraphicsContext graphicsContext, Game game) {
     this.graphicsContext = graphicsContext;
+    this.game = game;
   }
 
   public void update() {
@@ -21,8 +24,8 @@ public class Dino {
     if (isPause) {
       return;
     }
-    if (x > 600) {
-      x = 0;
+    if (x > game.getWidth()) {
+      x = -game.getWidth();
     } else {
       x += Time.deltaTime * 120;
     }
