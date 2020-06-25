@@ -1,12 +1,9 @@
 package fantasy0v0.dinoFx.sprite;
 
-import fantasy0v0.dinoFx.resources.Resources;
 import fantasy0v0.dinoFx.utils.Time;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Dino {
-
-  private final GraphicsContext graphicsContext;
+public class Dino extends Sprite {
 
   private final Game game;
 
@@ -15,17 +12,17 @@ public class Dino {
   private boolean isPause = false;
 
   public Dino(GraphicsContext graphicsContext, Game game) {
-    this.graphicsContext = graphicsContext;
+    super(graphicsContext);
     this.game = game;
   }
 
   public void update() {
-    graphicsContext.drawImage(Resources.offlineResources1X, 40, 4, 44, 45, x, 0, 44, 45);
+    drawImage(x, 0, ResourceDefinition.LDPI.TREX_INITIAL);
     if (isPause) {
       return;
     }
     if (x > game.getWidth()) {
-      x = -game.getWidth();
+      x = -44;
     } else {
       x += Time.deltaTime * 120;
     }

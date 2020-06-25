@@ -1,12 +1,9 @@
 package fantasy0v0.dinoFx.sprite;
 
-import fantasy0v0.dinoFx.resources.Resources;
 import fantasy0v0.dinoFx.utils.Time;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Ground {
-
-  private final GraphicsContext graphicsContext;
+public class Ground extends Sprite {
 
   private final Game game;
 
@@ -17,7 +14,7 @@ public class Ground {
   private boolean isPause = false;
 
   public Ground(GraphicsContext graphicsContext, Game game) {
-    this.graphicsContext = graphicsContext;
+    super(graphicsContext);
     this.game = game;
   }
 
@@ -33,20 +30,8 @@ public class Ground {
         sx = game.getWidth();
       }
     }
-    graphicsContext.drawImage(
-      Resources.offlineResources1X,
-      SpriteDefinition.LDPI.HORIZON.getX(), SpriteDefinition.LDPI.HORIZON.getY(),
-      SpriteDefinition.LDPI.HORIZON.getWidth(), SpriteDefinition.LDPI.HORIZON.getHeight(),
-      x, 100,
-      SpriteDefinition.LDPI.HORIZON.getWidth(), SpriteDefinition.LDPI.HORIZON.getHeight()
-    );
-    graphicsContext.drawImage(
-      Resources.offlineResources1X,
-      SpriteDefinition.LDPI.HORIZON.getX() + game.getWidth(), SpriteDefinition.LDPI.HORIZON.getY(),
-      SpriteDefinition.LDPI.HORIZON.getWidth(), SpriteDefinition.LDPI.HORIZON.getHeight(),
-      sx, 100,
-      SpriteDefinition.LDPI.HORIZON.getWidth(), SpriteDefinition.LDPI.HORIZON.getHeight()
-    );
+    drawImage(x, 100, ResourceDefinition.LDPI.HORIZON);
+    drawImage(sx, 100, ResourceDefinition.LDPI.HORIZON);
   }
 
   public void pause() {
