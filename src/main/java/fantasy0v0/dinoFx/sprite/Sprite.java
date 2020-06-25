@@ -36,4 +36,6 @@ public abstract class Sprite {
     drawImage(x, y, resource, resource.getWidth(), resource.getHeight());
   }
 
+  public abstract void update();
+
 }

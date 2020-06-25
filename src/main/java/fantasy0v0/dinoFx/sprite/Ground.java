@@ -18,6 +18,7 @@ public class Ground extends Sprite {
     this.game = game;
   }
 
+  @Override
   public void update() {
     if (!isPause) {
       double distance = Time.deltaTime * 120;

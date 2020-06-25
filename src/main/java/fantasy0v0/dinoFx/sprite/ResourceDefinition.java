@@ -63,6 +63,16 @@ public interface ResourceDefinition {
     Point2D TREX = new Point2D(848, 2);
 
     /**
+     * 霸王龙 奔跑 0
+     */
+    Rectangle TREX_RUN_0 = new Rectangle(936, 2, 44, 47);
+
+    /**
+     * 霸王龙 奔跑 1
+     */
+    Rectangle TREX_RUN_1 = new Rectangle(980, 2, 44, 47);
+
+    /**
      * 开始
      */
     Point2D STAR = new Point2D(645, 2);
