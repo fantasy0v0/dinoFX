@@ -55,7 +55,7 @@ public interface ResourceDefinition {
     /**
      * 霸王龙 初始
      */
-    Rectangle TREX_INITIAL = new Rectangle(40, 4, 44, 45);
+    Rectangle TREX_INITIAL = new Rectangle(40, 4, 44, 46);
 
     /**
      * 霸王龙

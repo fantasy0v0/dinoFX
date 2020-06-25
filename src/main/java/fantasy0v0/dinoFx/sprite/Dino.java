@@ -17,7 +17,8 @@ public class Dino extends Sprite {
   }
 
   public void update() {
-    drawImage(x, 0, ResourceDefinition.LDPI.TREX_INITIAL);
+    double y = game.getHeight() - ResourceDefinition.LDPI.TREX_INITIAL.getHeight() - 10;
+    drawImage(x, y, ResourceDefinition.LDPI.TREX_INITIAL);
     if (isPause) {
       return;
     }

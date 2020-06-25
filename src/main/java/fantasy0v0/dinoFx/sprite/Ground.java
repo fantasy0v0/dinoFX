@@ -30,8 +30,9 @@ public class Ground extends Sprite {
         sx = game.getWidth();
       }
     }
-    drawImage(x, 100, ResourceDefinition.LDPI.HORIZON);
-    drawImage(sx, 100, ResourceDefinition.LDPI.HORIZON);
+    double y = game.getHeight() - ResourceDefinition.LDPI.HORIZON.getHeight() - 10;
+    drawImage(x, y, ResourceDefinition.LDPI.HORIZON);
+    drawImage(sx, y, ResourceDefinition.LDPI.HORIZON);
   }
 
   public void pause() {
