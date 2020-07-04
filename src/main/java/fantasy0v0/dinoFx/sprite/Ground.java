@@ -25,19 +25,22 @@ public class Ground extends Sprite {
     Rectangle resource = ResourceDefinition.LDPI.HORIZON;
     double y = game.getHeight() - resource.getHeight() - 10;
     drawImage(x, y, resource);
-    drawImage(sx, y, resource);
     if (!isPause) {
       double distance = Time.deltaTime * 120;
       x -= distance;
-      if (x <= -resource.getWidth()) {
+      if (x < -resource.getWidth()) {
         x = resource.getWidth();
-      }
-      sx -= distance;
-      if (sx <= -resource.getWidth()) {
+        sx = 0;
+      } else if (x < 0) {
+        sx = x + resource.getWidth();
+      } else if (x > 0) {
+        sx = x - resource.getWidth();
+      } else {
         sx = resource.getWidth();
       }
     }
-
+    drawImage(sx, y, resource);
+    System.out.println("x:" + x + ", sx:" + sx);
   }
 
   public void pause() {
