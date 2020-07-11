@@ -11,7 +11,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -47,17 +46,6 @@ public class App extends Application {
         game.update();
       }
     }.start();
-    scene.setOnKeyPressed(event -> {
-      if (event.getCode().equals(KeyCode.SPACE)) {
-        Resources.Sounds.BUTTON_PRESS.play();
-      }
-      if (event.getCode().equals(KeyCode.P)) {
-        if (game.isPaused()) {
-          game.resume();
-        } else {
-          game.pause();
-        }
-      }
-    });
+    scene.setOnKeyPressed(event -> game.onKeyPressed(event.getCode()));
   }
 }

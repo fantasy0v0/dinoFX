@@ -1,6 +1,7 @@
 package fantasy0v0.dinoFx.sprite;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 
 public class Game {
 
@@ -55,5 +56,20 @@ public class Game {
 
   public double getHeight() {
     return height;
+  }
+
+  public void onKeyPressed(KeyCode keyCode) {
+    if (keyCode.equals(KeyCode.P)) {
+      if (isPaused()) {
+        resume();
+      } else {
+        pause();
+      }
+      return;
+    }
+
+    if (keyCode.equals(KeyCode.SPACE)) {
+      dino.jump();
+    }
   }
 }

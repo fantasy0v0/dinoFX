@@ -28,9 +28,9 @@ public class Animation {
     return frames[index];
   }
 
-  public static Animation of(double secPerFrame, Rectangle... frames) {
+  public static Animation of(double msPerFrame, Rectangle... frames) {
     Animation animation = new Animation();
-    animation.secPerFrame = secPerFrame;
+    animation.secPerFrame = msPerFrame / 1000;
     animation.frames = frames;
     return animation;
   }

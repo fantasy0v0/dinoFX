@@ -40,7 +40,6 @@ public class Ground extends Sprite {
       }
     }
     drawImage(sx, y, resource);
-    System.out.println("x:" + x + ", sx:" + sx);
   }
 
   public void pause() {
