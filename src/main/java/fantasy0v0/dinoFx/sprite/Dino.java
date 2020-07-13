@@ -12,30 +12,30 @@ public class Dino extends Sprite {
 
   private final Game game;
 
-  private double x = 20;
-
   private double y;
 
   private boolean isPause = false;
-
-  private int direction = 0;
 
   private AnimationStatus animationStatus = AnimationStatus.RUNNING;
 
   private final Map<AnimationStatus, Animation> animationMap = new HashMap<>();
 
+  private double jumpVelocity = -200;
+
   public Dino(GraphicsContext graphicsContext, Game game) {
     super(graphicsContext);
     this.game = game;
-    y = game.getHeight() - 47 - 10;
     animationMap.put(AnimationStatus.RUNNING, Animation.of(1000f / 12, ResourceDefinition.LDPI.TREX_RUN_0, ResourceDefinition.LDPI.TREX_RUN_1));
-    animationMap.put(AnimationStatus.JUMPING, Animation.of(1000, ResourceDefinition.LDPI.TREX_RUN_0));
+    animationMap.put(AnimationStatus.JUMPING, Animation.of(415, ResourceDefinition.LDPI.TREX_RUN_0, ResourceDefinition.LDPI.TREX_RUN_1));
+    double height = animationMap.get(animationStatus).getCurrentFrame().getHeight();
+    y = game.getHeight() - height - 10;
   }
 
   @Override
   public void update() {
     Animation animation = animationMap.get(animationStatus);
     Rectangle currentFrame = animation.getCurrentFrame();
+    double x = 20;
     drawImage(x, y, currentFrame);
     if (isPause) {
       return;
@@ -43,21 +43,17 @@ public class Dino extends Sprite {
 
     animation.update();
     if (animationStatus.equals(AnimationStatus.JUMPING)) {
-      double jumpVelocity = Time.deltaTime * 120;
-      if (direction == 0) {
-        y -= jumpVelocity;
-        if (y < currentFrame.getHeight()) {
-          direction = 1;
-        }
-      } else {
-        double maxHeight = game.getHeight() - currentFrame.getHeight() - 10;
-        if (maxHeight > y) {
-          y += jumpVelocity;
-        } else {
-          y = maxHeight;
-          direction = 0;
-          animationStatus = AnimationStatus.RUNNING;
-        }
+      y += this.jumpVelocity * Time.deltaTime;
+      double minHeight = 10;
+      double maxHeight = game.getHeight() - currentFrame.getHeight() - 10;
+      if (y < minHeight) {
+        y = minHeight;
+        jumpVelocity = Math.abs(jumpVelocity);
+      } else if (y > maxHeight) {
+        y = maxHeight;
+        jumpVelocity = -jumpVelocity;
+        animation.reset();
+        animationStatus = AnimationStatus.RUNNING;
       }
     }
   }

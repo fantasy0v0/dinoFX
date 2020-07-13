@@ -34,4 +34,9 @@ public class Animation {
     animation.frames = frames;
     return animation;
   }
+
+  public void reset() {
+    index = 0;
+    time = 0;
+  }
 }
