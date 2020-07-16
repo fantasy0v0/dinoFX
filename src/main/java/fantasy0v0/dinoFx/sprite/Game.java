@@ -70,6 +70,14 @@ public class Game {
 
     if (keyCode.equals(KeyCode.SPACE)) {
       dino.jump();
+    } else if (keyCode.equals(KeyCode.DOWN)) {
+      dino.startDuck();
+    }
+  }
+
+  public void onKeyReleased(KeyCode keyCode) {
+    if (keyCode.equals(KeyCode.DOWN)) {
+      dino.endDuck();
     }
   }
 }

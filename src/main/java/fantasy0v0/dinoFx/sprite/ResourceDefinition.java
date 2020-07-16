@@ -73,6 +73,16 @@ public interface ResourceDefinition {
     Rectangle TREX_RUN_1 = new Rectangle(980, 2, 44, 47);
 
     /**
+     * 霸王龙 躲避 0
+     */
+    Rectangle TREX_DUCK_0 = new Rectangle(1112, 19, 59, 30);
+
+    /**
+     * 霸王龙 躲避 1
+     */
+    Rectangle TREX_DUCK_1 = new Rectangle(1171, 19, 59, 30);
+
+    /**
      * 开始
      */
     Point2D STAR = new Point2D(645, 2);

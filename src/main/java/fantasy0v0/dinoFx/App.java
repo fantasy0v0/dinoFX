@@ -47,5 +47,6 @@ public class App extends Application {
       }
     }.start();
     scene.setOnKeyPressed(event -> game.onKeyPressed(event.getCode()));
+    scene.setOnKeyReleased(event -> game.onKeyReleased(event.getCode()));
   }
 }

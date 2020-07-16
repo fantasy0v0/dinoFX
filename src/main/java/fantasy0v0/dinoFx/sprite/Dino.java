@@ -20,13 +20,22 @@ public class Dino extends Sprite {
 
   private final Map<AnimationStatus, Animation> animationMap = new HashMap<>();
 
+  /**
+   * 速度
+   */
   private double jumpVelocity = -200;
+
+  /**
+   * 跳跃高度上限
+   */
+  private static final double minJumpHeight = 10;
 
   public Dino(GraphicsContext graphicsContext, Game game) {
     super(graphicsContext);
     this.game = game;
     animationMap.put(AnimationStatus.RUNNING, Animation.of(1000f / 12, ResourceDefinition.LDPI.TREX_RUN_0, ResourceDefinition.LDPI.TREX_RUN_1));
     animationMap.put(AnimationStatus.JUMPING, Animation.of(415, ResourceDefinition.LDPI.TREX_RUN_0, ResourceDefinition.LDPI.TREX_RUN_1));
+    animationMap.put(AnimationStatus.DUCKING, Animation.of(1000f / 12, ResourceDefinition.LDPI.TREX_DUCK_0, ResourceDefinition.LDPI.TREX_DUCK_1));
     double height = animationMap.get(animationStatus).getCurrentFrame().getHeight();
     y = game.getHeight() - height - 10;
   }
@@ -44,10 +53,10 @@ public class Dino extends Sprite {
     animation.update();
     if (animationStatus.equals(AnimationStatus.JUMPING)) {
       y += this.jumpVelocity * Time.deltaTime;
-      double minHeight = 10;
+
       double maxHeight = game.getHeight() - currentFrame.getHeight() - 10;
-      if (y < minHeight) {
-        y = minHeight;
+      if (y < minJumpHeight) {
+        y = minJumpHeight;
         jumpVelocity = Math.abs(jumpVelocity);
       } else if (y > maxHeight) {
         y = maxHeight;
@@ -55,6 +64,8 @@ public class Dino extends Sprite {
         animation.reset();
         animationStatus = AnimationStatus.RUNNING;
       }
+    } else if (animationStatus.equals(AnimationStatus.DUCKING)) {
+
     }
   }
 
@@ -70,9 +81,34 @@ public class Dino extends Sprite {
     if (isPause) {
       return;
     }
-    if (!animationStatus.equals(AnimationStatus.JUMPING)) {
+    if (animationStatus.equals(AnimationStatus.RUNNING)) {
       animationStatus = AnimationStatus.JUMPING;
       Resources.Sounds.BUTTON_PRESS.play();
+    }
+  }
+
+  public void startDuck() {
+    if (isPause) {
+      return;
+    }
+    if (animationStatus.equals(AnimationStatus.RUNNING)) {
+      animationStatus = AnimationStatus.DUCKING;
+      // 设置新的y
+      Animation animation = animationMap.get(animationStatus);
+      Rectangle currentFrame = animation.getCurrentFrame();
+      y = game.getHeight() - currentFrame.getHeight() - 10;
+    }
+  }
+
+  public void endDuck() {
+    if (isPause) {
+      return;
+    }
+    if (animationStatus.equals(AnimationStatus.DUCKING)) {
+      animationStatus = AnimationStatus.RUNNING;
+      // 还原y
+      double height = animationMap.get(animationStatus).getCurrentFrame().getHeight();
+      y = game.getHeight() - height - 10;
     }
   }
 
@@ -85,7 +121,9 @@ public class Dino extends Sprite {
 
     RUNNING,
 
-    JUMPING
+    JUMPING,
+
+    DUCKING
 
   }
 }
