@@ -15,10 +15,9 @@ public class Cloud extends Sprite {
     super(graphicsContext);
     this.game = game;
     for (int i = 0; i < xPos.length; i++) {
-      xPos[i] = game.getWidth() + ResourceDefinition.LDPI.CLOUD.getWidth() * i * 3;
+      xPos[i] = game.getWidth() + ResourceDefinition.LDPI.CLOUD.getWidth() * i * getRandom(3, 5);
       yPos[i] = getRandomY();
     }
-
   }
 
   @Override
@@ -33,7 +32,11 @@ public class Cloud extends Sprite {
     }
   }
 
+  private double getRandom(int min, int max) {
+    return Math.random() * max + min;
+  }
+
   private double getRandomY() {
-    return Math.random() * 45 + 5;
+    return getRandom(5, 45);
   }
 }
