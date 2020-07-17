@@ -25,7 +25,7 @@ public interface ResourceDefinition {
     /**
      * 云
      */
-    Point2D CLOUD = new Point2D(86, 2);
+    Rectangle CLOUD = new Rectangle(86, 2, 46, 13);
 
     /**
      * 地平线

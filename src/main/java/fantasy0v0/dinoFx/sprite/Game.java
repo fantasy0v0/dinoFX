@@ -15,6 +15,8 @@ public class Game {
 
   private Dino dino;
 
+  private Cloud cloud;
+
   private boolean paused;
 
   public Game(GraphicsContext graphicsContext, double width, double height) {
@@ -27,9 +29,11 @@ public class Game {
   private void init() {
     ground = new Ground(graphicsContext, this);
     dino = new Dino(graphicsContext, this);
+    cloud = new Cloud(graphicsContext, this);
   }
 
   public void update() {
+    cloud.update();
     ground.update();
     dino.update();
   }
